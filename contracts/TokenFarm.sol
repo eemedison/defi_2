@@ -1,11 +1,13 @@
 
 //SPDX-License_Identifier: MIT
 
- pragma solidity ^0.8.0;
+ pragma solidity ^0.8.7;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+//import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+
 //import "@chainlink/contracts/src/interfaces/AggregatorV3Interface.sol";
 
 contract TokenFarm is Ownable{
@@ -45,11 +47,11 @@ contract TokenFarm is Ownable{
             stakersIndex++
         ) {
             address recipient = stakers[stakersIndex];
-            uint userTotalValue = getUserTotalValue(recipient);
+            uint userTotalValue = getUserTotalValue(recipient); //lock tokenların usd karşılığı kadar reward
             // send them a token reward (dapp token)
             // based on their total value locked
             //dappToken.transfer(recipient, getUserTotalValue(recipient));
-            dappToken.transfer(recipient, userTotalValue);
+            dappToken.transfer(recipient, userTotalValue); //Stake ettiği token'ın USD değeri kadar para alır.
         }
     }
 
